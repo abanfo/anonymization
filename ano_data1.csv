@@ -1,0 +1,9 @@
+datum,rekening_nummer,rekening_naam,tegenrekening_nummer,tegenrekening_naam,munteenheid,bedrag,D/C,omschrijving,categorie,bestandsnaam,Fake_omschrijving,Fake_rekening_nummer,Fake_tegenrekening_nummer,Fake_rekening_naam,Fake_tegenrekening_naam
+,1,ab,1,ab,,,,i am ,,,omschrijving 1,NL81DGVC6728707636,NL81DGVC6728707636,rekening_naam 2,tegenrekening_naam 2
+,1,ab,1,ab,,,,i am ,,,omschrijving 1,NL81DGVC6728707636,NL81DGVC6728707636,rekening_naam 2,tegenrekening_naam 2
+,2,cd,2,cd,,,,me,,,omschrijving 2,NL59CDQB8144464292,NL59CDQB8144464292,rekening_naam 4,tegenrekening_naam 4
+,2,cd,2,cd,,,,me,,,omschrijving 2,NL59CDQB8144464292,NL59CDQB8144464292,rekening_naam 4,tegenrekening_naam 4
+,5,rq,2,rq,,,,me,,,omschrijving 2,NL92PWLX0410983670,NL59CDQB8144464292,rekening_naam 5,tegenrekening_naam 5
+,3,qetqer,2,qetqer,,,,me,,,omschrijving 2,NL59PZOM6314704127,NL59CDQB8144464292,rekening_naam 6,tegenrekening_naam 6
+,4,wrqtrew,5,wrqtrew,,,,i am ,,,omschrijving 1,NL90TCJA4792093856,NL92PWLX0410983670,rekening_naam 7,tegenrekening_naam 7
+,0,qrtreqt,5,qrtreqt,,,,,,,,NL31CBDS2771369133,NL92PWLX0410983670,rekening_naam 8,tegenrekening_naam 8
