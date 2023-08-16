@@ -107,7 +107,7 @@ class DataLoader:
     def __init__(self, filename):
         self.filename = filename
         self._load_data()
-        self.anonymizer = anonymize(self.data_df)  # Create an instance of anonymize
+        self.anonymizer = anonymize(self.data_df)  # Create an instance of Anonymizer
     def _load_data(self):
         self.data_df = pd.read_csv(self.filename, delimiter=seprator)
 
@@ -115,42 +115,34 @@ class DataLoader:
         print(f'loading {self.filename}')
         try:
             if "omschrijving" in self.data_df.columns:  # Check if "omschrijving" column exists
-                self._process_with_omschrijving(anonymizer,file_name)
+                self._process_with_omschrijving(file_name)
             else:
-                self._process_without_column(anonymizer,file_name)
+                self._process_without_column(file_name)
             if "rekening_nummer" in self.data_df.columns:
-                self._process_with_rekening(anonymizer,file_name)
+                self._process_with_rekening(file_name)
             else:
-                self._process_without_column(anonymizer,file_name)
+                self._process_without_column(file_name)
         except Exception as e:
             print("Exception occurred:", str(e))
         
         
 
-    def _process_with_omschrijving(self, anonymizer,file_name):
-        # an = anonymizer(self.data_df)
-        fake_df = (
-            self.anonymizer
-            .fake_categy("omschrijving", chaining=True)
-        )
-        fake_df.save(f"ano_{self.filename}")
+    def _process_with_omschrijving(self, file_name):
+        fake_df = self.anonymizer.fake_categy("omschrijving", chaining=True)
+        self._save_result(fake_df, file_name)
         
-    def _process_without_column(self, anonymizer,file_name):
+    def _process_without_column(self, file_name):   
         print("Column 'omschrijving' not found in the DataFrame. Skipping 'omschrijving' column...")
-        self.anonymizer
-        fake_df = (
-            self.anonymizer
-        )
-        fake_df.save(f"ano_{self.filename}")
+        fake_df = self.anonymizer
+        self._save_result(fake_df, file_name)
 
 
-    def _process_with_rekening(self, anonymizer,file_name):
-        self.anonymizer
-        fake_df = (
-            self.anonymizer
-            .fake_rakening("rekening_naam","tegenrekening_naam", chaining=True)
-        )
-        fake_df.save(f"ano_{self.filename}")
+    def _process_with_rekening(self, file_name):
+        fake_df = self.anonymizer.fake_rakening("rekening_naam", "tegenrekening_naam", chaining=True)
+        self._save_result(fake_df, file_name)
+        
+    def _save_result(self, fake_df, file_name):
+        fake_df.save(f"ano_{file_name}")
         
 
 
