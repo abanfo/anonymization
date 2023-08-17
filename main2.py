@@ -115,30 +115,50 @@ class DataLoader:
         print(f'loading {self.filename}')
         try:
             if "omschrijving" in self.data_df.columns:  # Check if "omschrijving" column exists
-                self._process_with_omschrijving(file_name)
+                self._process_with_category(file_name, "omschrijving")
             else:
-                self._process_without_column(file_name)
-            if "rekening_nummer" in self.data_df.columns:
-                self._process_with_rekening(file_name)
+                self._process_without_column(file_name, "omschrijving")
+            if "rekening_naam" in self.data_df.columns and "tegenrekening_naam" in self.data_df.columns:
+                self._process_with_rekeningNaam(file_name, "rekening_naam","tegenrekening_naam")
             else:
-                self._process_without_column(file_name)
+                self._process_without_column(file_name, "rekening_naam","tegenrekening_naam")
+            if "rekening_nummer" in self.data_df.columns and "tegenrekening_nummer" in self.data_df.columns:
+                self._process_with_rekening(file_name, "rekening_nummer","tegenrekening_nummer")
+            else:
+                self._process_without_column(file_name, "rekening_nummer","tegenrekening_nummer")
+            if "company" in self.data_df.columns and "name" in self.data_df.columns and "straat" in self.data_df.columns:
+                self._process_with_more_categories(file_name, "company","name","straat")
+            else:
+                self._process_without_column(file_name, "company","straat","naam")
+            if "postcode" in self.data_df.columns:
+                pass
+            else:
+                self._process_without_column(file_name, "postcode")
+
         except Exception as e:
             print("Exception occurred:", str(e))
         
         
 
-    def _process_with_omschrijving(self, file_name):
-        fake_df = self.anonymizer.fake_categy("omschrijving", chaining=True)
+    def _process_with_category(self, file_name,col_naam=None):
+        fake_df = self.anonymizer.fake_categy(col_naam, chaining=True)
         self._save_result(fake_df, file_name)
         
-    def _process_without_column(self, file_name):   
-        print("Column 'omschrijving' not found in the DataFrame. Skipping 'omschrijving' column...")
-        fake_df = self.anonymizer
+    def _process_with_rekeningNaam(self, file_name, col_naam=None,col_tegen=None):
+        fake_df = self.anonymizer.fake_categories(col_naam, col_tegen, chaining=True)
+        self._save_result(fake_df, file_name)
+    
+    def _process_with_rekening(self, file_name, col_naam=None,col_tegen=None):
+        fake_df = self.anonymizer.fake_rekenings(col_naam, col_tegen, chaining=True)
         self._save_result(fake_df, file_name)
 
+    def _process_with_more_categories(self, file_name, col_naam=None,col_tegen=None):
+        fake_df = self.anonymizer.fake_more_categories(col_naam, col_tegen, chaining=True)
+        self._save_result(fake_df, file_name)
 
-    def _process_with_rekening(self, file_name):
-        fake_df = self.anonymizer.fake_rakening("rekening_naam", "tegenrekening_naam", chaining=True)
+    def _process_without_column(self, file_name, col_naam=None, tegen_col_naam =None):   
+        print(f"Column {col_naam} or {tegen_col_naam} not found in the DataFrame. Skipping {col_naam} {tegen_col_naam} column...")
+        fake_df = self.anonymizer
         self._save_result(fake_df, file_name)
         
     def _save_result(self, fake_df, file_name):
