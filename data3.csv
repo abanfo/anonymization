@@ -1,6 +1,6 @@
 datum;rekening_nummer;rekening_naam;tegenrekening_nummer;tegenrekening_naam;munteenheid;bedrag;D/C;omschrijving;categorie;bestandsnaam
-;1;ab;1;ab;;;;i am ;;
-;1;ab;1;ab;;;;i am ;;
+;1;ab;1;ab;;;;/TRTP/SEPA OVERBOEKING/IBAN/NL69ABNA0485475103/BIC/ABNANL2A/NAME/V O F SCHOTMAN EN ZN/REMI/FACT 7640.62/1000843231/EREF/NOTPROVIDED;;
+;1;ab;1;ab;;;;/TRTP/SEPA OVERBOEKING/IBAN/NL69ABNA0485475103/BIC/ABNANL2A/NAME/V O F SCHOTMAN EN ZN/REMI/FACT 7640.62/1000843231/EREF/NOTPROVIDED;;
 ;2;cd;2;cd;;;;me;;
 ;2;cd;2;cd;;;;me;;
 ;5;rq;2;rq;;;;me;;

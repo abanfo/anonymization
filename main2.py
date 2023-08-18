@@ -48,24 +48,30 @@ class DataLoader:
             #     self._process_with_rekening(file_name, ["rekening"])
             # else:
             #     self._process_without_column(file_name)
-            if "naam" in self.data_df.columns:
-                self._process_with_name(file_name, ["naam"])
+            # if "naam" in self.data_df.columns:
+            #     self._process_with_name(file_name, ["naam"])
+            # else:
+            #     self._process_without_column(file_name)
+            # if "straat" in self.data_df.columns:
+            #     self._process_with_street(file_name,["straat"])
+            # else:
+            #     self._process_without_column(file_name)
+            # if "postcode" in self.data_df.columns:
+            #     self._process_with_postcode(file_name,["postcode"])
+            # else:
+            #     self._process_without_column(file_name)
+            if "omschrijving" in self.data_df.columns:
+                self._process_with_omschrijven(file_name,["omschrijving"])
             else:
-                self._process_without_column(file_name)
-            if "straat" in self.data_df.columns:
-                self._process_with_street(file_name,["straat"])
-            else:
-                self._process_without_column(file_name)
-            if "postcode" in self.data_df.columns:
-                self._process_with_postcode(file_name,["postcode"])
-            else:
-                self._process_without_column(file_name)
-
+                self._process_without_column(file_name)      
 
         except Exception as e:
             print("Exception occurred:", str(e))
         
-        
+
+    def _process_with_omschrijven(self,file_name,col_name):
+        fake_df = self.anonymizer.fake_omschrijven(*col_name, chaining=True)
+        self._save_result(fake_df, file_name)    
     def _process_with_name(self,file_name,col_name):
         fake_df = self.anonymizer.fake_names(*col_name, chaining=True)
         self._save_result(fake_df, file_name)
@@ -99,7 +105,7 @@ class DataLoader:
 
 # Process data for each CSV file
 if __name__ == "__main__":
-    for one_filename in glob.glob(r'emp.csv'):
+    for one_filename in glob.glob(r'data3.csv'):
         loader = DataLoader(one_filename)
         anonymizer = anonymize  # Provide the Anonymizer class here
         loader.process_data(anonymizer, one_filename)
