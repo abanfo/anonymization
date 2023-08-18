@@ -2,100 +2,8 @@ import pandas as pd
 from anonymizedf.anonymizedf import anonymize
 
 
-# all code works
-
-# def anonymize_data(input_file, output_file, column_mappings):
-#     # Import the data
-#     def __init__():
-#         pass
-     
-#     df = pd.read_csv(input_file, delimiter=";")
-   
-
-#     an = anonymize(df)
-#     fake_df = an
-
-#     # Apply anonymization transformations dynamically based on column mappings
-#     for column, transformations in column_mappings.items():
-#         for transformation in transformations:
-#             fake_df = getattr(fake_df, transformation)(column, chaining=True)
-
-#     # # Generate the final anonymized DataFrame
-    
-#     fake_df = fake_df.show_data_frame()
-
-#     # # Save the anonymized DataFrame to a CSV file
-#     fake_df.to_csv(output_file, index=False)
-    
-        
-
-# if __name__ == "__main__":
-    
-#     input_file = "data1.csv"
-#     output_file = "fake_customers5.csv"
-#     column_mappings = {
-#     "rekening_naam": ["fake_categories"],
-#     "tegenrekening_naam": ["fake_categories"],
-#     "omschrijving": ["fake_categories"],
-#     "rekening_nummer": ["fake_rakening"],
-#     # "HouseNumber": ["fake_whole_numbers"],
-#     # "Name":["fake_names"]
-#     }
-#     anonymize_data = anonymize_data(input_file, output_file, column_mappings)
-    
-# df = pd.read_csv("data1.csv", delimiter=";")
-# an = anonymize(df)
-
-# fake_df = (
-#     an
-#     .fake_rakening("rekening_nummer","tegenrekening_nummer",chaining=True)
-#     .fake_categories("rekening_naam","tegenrekening_naam",chaining=True)
-#     # .fake_rakening("tegenrekening_nummer", chaining=True)
-#     # .fake_whole_numbers("Loyalty Reward Points", chaining=True)
-#     # .fake_categories("Segment", chaining=True)
-#     # .fake_dates("Date", chaining=True)
-#     # .fake_decimal_numbers("Fraction", chaining=True)
-#     # .show_data_frame()
-# )
-# # an.fake_whole_numbers("Loyalty Reward Points")
-# # an.fake_categories("Segment")
-# # an.fake_dates("Date")
-# # an.fake_decimal_numbers("Fraction")
-# # col_list = ['rekening_naam','tegenrekening_naam']
-# # for col in col_list:
-# #     an.fake_categories(col)
-
-    
-# fake_df.save("fake_customers5.csv")
-
-# class Anonymizer:
-#     def __init__(self, input_file, output_file):
-#         self.input_file = input_file
-#         self.output_file = output_file
-        
-#     def anonymize_data(self):
-#         df = pd.read_csv(self.input_file, delimiter=";")
-#         print("data reading")
-#         an = anonymize(df)
-        
-#         fake_df = (
-#             an
-#             .fake_rakening("rekening_nummer", "tegenrekening_nummer", chaining=True)
-#             # .fake_categories("rekening_naam", "tegenrekening_naam", chaining=True)
-#             # .fake_categy("omschrijving", chaining=True)
-#             # .show_data_frame()
-#         )
-#         print("saving")
-#         # fake_df.save(f"ano_{one_filename}")
-        
-#         fake_df.save(self.output_file)
-        
-# if __name__ == "__main__":
-#     input_file = "data1.csv"
-#     output_file = "fake_customers5.csv"
-    
-#     anonymizer = Anonymizer(input_file, output_file)
-#     anonymizer.anonymize_data()
+# # todo list
+#  *continue with emp file and ano all columns -> stad and rekening is remining
 
 import glob
 
@@ -113,51 +21,73 @@ class DataLoader:
 
     def process_data(self, anonymizer, file_name):
         print(f'loading {self.filename}')
+        # tobe implemented
+
         try:
-            if "omschrijving" in self.data_df.columns:  # Check if "omschrijving" column exists
-                self._process_with_category(file_name, "omschrijving")
+            # if "company" in self.data_df.columns:  # Check if "omschrijving" column exists
+            #     self._process_with_category(file_name, ["company"])
+            # else:
+            #     self._process_without_column(file_name)
+                
+            # if "rekening_naam" in self.data_df.columns and "tegenrekening_naam" in self.data_df.columns:
+            #     self._process_with_category(file_name, ["rekening_naam","tegenrekening_naam"])
+            # elif "rekening_naam" in self.data_df.columns:
+            #     self._process_with_category(file_name, ["rekening_naam","tegenrekening_naam"])
+            # elif "rekening_naam" in self.data_df.columns:
+            #     self._process_with_category(file_name, ["rekening_naam"])
+            # elif "tegenrekening_naam" in self.data_df.columns:
+            #     self._process_with_category(file_name, ["tegenrekening_naam"])
+            # else:
+            #     self._process_without_column(file_name)
+
+            # if "rekening_nummer" in self.data_df.columns and "tegenrekening_nummer" in self.data_df.columns and "rekening" in self.data_df.columns:
+            #     self._process_with_rekening(file_name, ["rekening_nummer","tegenrekening_nummer", "rekening"])
+            # elif "rekening_nummer" in self.data_df.columns and "tegenrekening_nummer" in self.data_df.columns:
+            #     self._process_with_rekening(file_name, ["rekening_nummer","tegenrekening_nummer"])
+            # elif self._process_with_rekening(file_name, ["rekening"]):
+            #     self._process_with_rekening(file_name, ["rekening"])
+            # else:
+            #     self._process_without_column(file_name)
+            if "naam" in self.data_df.columns:
+                self._process_with_name(file_name, ["naam"])
             else:
-                self._process_without_column(file_name, "omschrijving")
-            if "rekening_naam" in self.data_df.columns and "tegenrekening_naam" in self.data_df.columns:
-                self._process_with_rekeningNaam(file_name, "rekening_naam","tegenrekening_naam")
+                self._process_without_column(file_name)
+            if "straat" in self.data_df.columns:
+                self._process_with_street(file_name,["straat"])
             else:
-                self._process_without_column(file_name, "rekening_naam","tegenrekening_naam")
-            if "rekening_nummer" in self.data_df.columns and "tegenrekening_nummer" in self.data_df.columns:
-                self._process_with_rekening(file_name, "rekening_nummer","tegenrekening_nummer")
-            else:
-                self._process_without_column(file_name, "rekening_nummer","tegenrekening_nummer")
-            if "company" in self.data_df.columns and "name" in self.data_df.columns and "straat" in self.data_df.columns:
-                self._process_with_more_categories(file_name, "company","name","straat")
-            else:
-                self._process_without_column(file_name, "company","straat","naam")
+                self._process_without_column(file_name)
             if "postcode" in self.data_df.columns:
-                pass
+                self._process_with_postcode(file_name,["postcode"])
             else:
-                self._process_without_column(file_name, "postcode")
+                self._process_without_column(file_name)
+
 
         except Exception as e:
             print("Exception occurred:", str(e))
         
         
-
-    def _process_with_category(self, file_name,col_naam=None):
-        fake_df = self.anonymizer.fake_categy(col_naam, chaining=True)
-        self._save_result(fake_df, file_name)
-        
-    def _process_with_rekeningNaam(self, file_name, col_naam=None,col_tegen=None):
-        fake_df = self.anonymizer.fake_categories(col_naam, col_tegen, chaining=True)
+    def _process_with_name(self,file_name,col_name):
+        fake_df = self.anonymizer.fake_names(*col_name, chaining=True)
         self._save_result(fake_df, file_name)
     
-    def _process_with_rekening(self, file_name, col_naam=None,col_tegen=None):
-        fake_df = self.anonymizer.fake_rekenings(col_naam, col_tegen, chaining=True)
+    def _process_with_postcode(self,file_name,col_name):
+        fake_df = self.anonymizer.fake_postcode(*col_name, chaining=True)
+        self._save_result(fake_df, file_name)
+    
+    def _process_with_street(self,file_name,col_name):
+        fake_df = self.anonymizer.fake_street(*col_name, chaining=True)
         self._save_result(fake_df, file_name)
 
-    def _process_with_more_categories(self, file_name, col_naam=None,col_tegen=None):
-        fake_df = self.anonymizer.fake_more_categories(col_naam, col_tegen, chaining=True)
+    def _process_with_category(self, file_name,col_name):
+        fake_df = self.anonymizer.fake_category(*col_name, chaining=True)
+        self._save_result(fake_df, file_name)
+        
+    def _process_with_rekening(self, file_name, col_name):
+        fake_df = self.anonymizer.fake_rekening(*col_name, chaining=True)
         self._save_result(fake_df, file_name)
 
-    def _process_without_column(self, file_name, col_naam=None, tegen_col_naam =None):   
-        print(f"Column {col_naam} or {tegen_col_naam} not found in the DataFrame. Skipping {col_naam} {tegen_col_naam} column...")
+    def _process_without_column(self, file_name):   
+        print(f"Column  not found in the DataFrame. Skipping  column...")
         fake_df = self.anonymizer
         self._save_result(fake_df, file_name)
         
@@ -169,7 +99,7 @@ class DataLoader:
 
 # Process data for each CSV file
 if __name__ == "__main__":
-    for one_filename in glob.glob(r'*.csv'):
+    for one_filename in glob.glob(r'emp.csv'):
         loader = DataLoader(one_filename)
         anonymizer = anonymize  # Provide the Anonymizer class here
         loader.process_data(anonymizer, one_filename)
